@@ -1,7 +1,7 @@
 public class App {
     
     public static void main(String[] args) throws Exception {
-        testDriver();
+        craps_sim();
     }
 
     //'test driver' since idk how to generate tests in vscode 
@@ -23,9 +23,46 @@ public class App {
         You win if a 7 or 11 roll, or lose if 2, 3, or 12 roll (known as “craps”). 
         Any other number that rolls becomes the “point” and the point must roll again before a 7 to win.
         */
+        // may honestly be better to use if statements... switch statements are unnecessarily restrictive
         for (int i=0; i<iterations; i++) {
             dice.roll();
             int roll = dice.getSum();
+            if (roll == 7 || roll == 11) { //win
+                wins+=1;
+            } else if (roll == 2 || roll == 3 || roll == 12) { //loss
+                losses+=1;
+            } else {
+                point = roll; // Set the point
+                boolean outcome = roll_until_point(point, wins, losses, dice); //Roll until you either get the point and win, or roll a 7 and lose. True = won, False = lost
+                if (outcome) {
+                    wins+=1;
+                } else {
+                    losses+=1;
+                }
+            }
         }
+
+        //Print results
+        System.out.println("Total iterations: " + iterations);
+        System.out.println("Wins: " + wins);
+        System.out.println("Lossses: " + losses);
+    }
+
+    public static boolean roll_until_point(int point, int wins, int losses, PairOfDice dice) {
+        int roll = 0;
+
+        while (roll != 7 || roll != point) {
+            dice.roll();
+            roll = dice.getSum();
+            if (roll == 7) {
+                return false;
+            } else if (roll==point) {
+                return true;
+            }
+        }
+        
+        // these lines should never actually run but needed to shut up the compiler
+        System.out.println("you fucked up");
+        return false;
     }
 }
