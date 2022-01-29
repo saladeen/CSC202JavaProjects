@@ -1,5 +1,4 @@
 import java.security.SecureRandom;
-import java.security.SecureRandom;
 
 public class PairOfDice {
     private int diceOne;
