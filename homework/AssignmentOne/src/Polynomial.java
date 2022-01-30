@@ -1,10 +1,16 @@
+
 public class Polynomial {
     int degree;
-    int[] coefficients; // organization - index 0 = coefficient of degree 0 term... index 3 = coefficient of degree 3 term
+    double[] coefficients; // organization - index 0 = coefficient of degree 0 term... index 3 = coefficient of degree 3 term
     
     public Polynomial(int deg) {
         degree = deg;
-        coefficients = new int[deg + 1]; // need 4 array spots for degree 3 polynomial, since it includes degree 0 (constants)
+        coefficients = new double[deg + 1]; // need 4 array spots for degree 3 polynomial, since it includes degree 0 (constants)
+    }
+
+    public Polynomial(double[] coefs) { // Constructor for part b
+        coefficients = coefs;
+        degree = coefs.length - 1;
     }
 
     public void setCoefficient(int exponent, int coef) {

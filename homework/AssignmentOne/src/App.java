@@ -1,9 +1,13 @@
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
 
 public class App {
     
     public static void main(String[] args) throws Exception {
-        polynomialDriver();
+        testing();
     }
 
     //'test driver' since idk how to generate tests in vscode 
@@ -94,5 +98,50 @@ public class App {
         System.out.println(nom.evaluate(1.0));
         System.out.println(nom.evaluate(0.5));
 
+    }
+
+    public static void polyPartB() {
+        Scanner sc = new Scanner(System.in);
+        double[] test = getPolyInput(sc);
+        
+        Polynomial poly = new Polynomial(test);
+
+
+        while(true) {
+            System.out.println("Now enter a value (for x) to evaluate the polynomial:");
+            System.out.println( poly.evaluate( sc.nextDouble() ) );
+            System.out.println("Keep going? y/n");
+            String y_n = sc.next();
+            if (y_n.equals("n")) {
+                break;
+            }
+        }
+        sc.close();
+    }
+
+    // Array needs to be REVERSED! Otherwise the class will interpret index 0 as degree 0, NOT degree 5 like it should be
+    public static double[] getPolyInput(Scanner sc) {
+        System.out.println("Enter the coefficients of a polynomial, like this: 3 5 0 2 -3");
+        String[] input = sc.nextLine().split(" ", 0);
+        double[] inputAsDouble = Stream.of(input).mapToDouble(Double::parseDouble).toArray();
+        return inputAsDouble;
+    }
+
+    public static void RiemannSummer() {
+        System.out.println("Enter a ");
+    }
+
+    public static void testing() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the coefficients of a polynomial, like this: 3 5 0 2 -3");
+        String[] input = sc.nextLine().split(" ", 0);
+        List<String> test = Arrays.asList(input);
+        double[] inputAsDouble = Stream.of(input).mapToDouble(Double::parseDouble).toArray();
+
+        int len = inputAsDouble.length;
+        double[] reversed = new double[len];
+        for (int i=len-1; i>=0; i++) {
+            
+        }
     }
 }
