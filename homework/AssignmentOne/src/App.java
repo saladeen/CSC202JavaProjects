@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public class App {
     
     public static void main(String[] args) throws Exception {
-        polyPartB();
+        RiemannSummer();
     }
 
     //'test driver' since idk how to generate tests in vscode 
@@ -133,9 +133,33 @@ public class App {
     }
 
     public static void RiemannSummer() {
-        // Assuming a midpoint Riemann Sum
+        // Assuming a left-handed Riemann Sum
         // values needed: range, polynomial
-        // 
-        System.out.println("Enter a ");
+    
+        Scanner sc = new Scanner(System.in);
+        Polynomial poly = new Polynomial(getPolyInput(sc));
+
+        System.out.println("Enter the start of the range:");
+        double min = sc.nextDouble();
+        System.out.println("Enter the end of the range:");
+        double max = sc.nextDouble();
+        System.out.println("Enter how many rectangles to draw");
+        double rectCount = sc.nextDouble();
+
+        double range = max - min;
+        double rectXLength = range / rectCount;
+        double rSum = 0;
+
+        // Divide the range by the number of rectangles to draw to determine the length of the bottom (x-axis) side of each rectangle
+        // Since we're drawing a left-handed sum, the length of the long (y-axis) side will be the value of f(x) where x is the x-value of the bottom left corner of the rectangle
+        // So this starts at 0 and increments by rectXLength, and then is put into the polynomial to get the Y length, the rectXLength and Y are multiplied together to determine the area of that rectangle
+        // Then repeat incrementing by rectXLength and adding to a total area calculation
+
+        // value of i gets plugged into the solver, then multiplied by rectXLength to get the area of that rectangle
+        for (double i=0.0; i<range; i = i + rectXLength) {
+            rSum += poly.evaluate(i) * rectXLength;
+        }
+    
+        System.out.println(rSum);
     }
 }
