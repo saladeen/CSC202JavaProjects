@@ -3,9 +3,9 @@ public class ShoppingBag {
     private double totalCost;
     private double taxRate;
 
-    public ShoppingBag(int items, double cost, double tax) {
-        numberOfItems = items;
-        totalCost = cost;
+    public ShoppingBag(double tax) {
+        numberOfItems = 0;
+        totalCost = 0.0;
         taxRate = tax;
     }
 
@@ -15,6 +15,18 @@ public class ShoppingBag {
     }
 
     public String toString() {
-        return "Items in bag: " + numberOfItems + "\nSubtotal: " + totalCost + "\nTotal with tax: " + totalCost * (1.0 + taxRate);
+        return "Items in bag: " + numberOfItems + "\nSubtotal: " + totalCost + "\nTotal with tax: " + getTotal();
+    }
+
+    public int getNumberOfItems() {
+        return numberOfItems;
+    }
+
+    public double getSubtotal() {
+        return totalCost;
+    }
+
+    public double getTotal() {
+        return totalCost * (1 + taxRate);
     }
 }

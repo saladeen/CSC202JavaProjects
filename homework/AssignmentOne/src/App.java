@@ -62,7 +62,16 @@ public class App {
         }
         
         // these lines should never actually run but needed to shut up the compiler
-        System.out.println("you fucked up");
+        System.out.println("you done messed up A-A-Ron");
         return false;
+    }
+
+    public static void shoppingBagDriver() {
+        ShoppingBag bag = new ShoppingBag(6.0); //tax = 6%
+        int count = 1;
+        while(count != 0) {
+            System.out.println("Enter count (use 0 to stop):");
+            
+        }
     }
 }
