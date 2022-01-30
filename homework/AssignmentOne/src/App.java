@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class App {
     
     public static void main(String[] args) throws Exception {
-        shoppingBagDriver();
+        polynomialDriver();
     }
 
     //'test driver' since idk how to generate tests in vscode 
@@ -89,6 +89,10 @@ public class App {
         nom.setCoefficient(3, 5);
         nom.setCoefficient(1, 2);
         nom.setCoefficient(0, -3);
+
+        System.out.println(nom.evaluate(0.0));
+        System.out.println(nom.evaluate(1.0));
+        System.out.println(nom.evaluate(0.5));
 
     }
 }

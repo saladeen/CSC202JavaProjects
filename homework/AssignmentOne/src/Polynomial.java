@@ -4,7 +4,7 @@ public class Polynomial {
     
     public Polynomial(int deg) {
         degree = deg;
-        coefficients = new int[deg];
+        coefficients = new int[deg + 1]; // need 4 array spots for degree 3 polynomial, since it includes degree 0 (constants)
     }
 
     public void setCoefficient(int exponent, int coef) {
@@ -13,7 +13,7 @@ public class Polynomial {
 
     public double evaluate(double xval) {
         double total = 0.0;
-        for (int i: coefficients) {
+        for (int i=0; i<degree+1; i++) {
             // total += xval ^ index (degree) * value of array at index (coefficient)
             // Math.pow(base, exponent), base = xval, exponent = index of array
             total += Math.pow(xval, i) * coefficients[i];
