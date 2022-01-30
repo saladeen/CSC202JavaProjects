@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.DoubleStream;
@@ -7,7 +9,7 @@ import java.util.stream.Stream;
 public class App {
     
     public static void main(String[] args) throws Exception {
-        testing();
+        polyPartB();
     }
 
     //'test driver' since idk how to generate tests in vscode 
@@ -100,11 +102,12 @@ public class App {
 
     }
 
+    // The textbook has some WACK instructions for this part. They give an example where they say an input of "3 5 0 2 0 -3" should yield the polynomial 5x^3 + 2x - 3. Clearly,
+    // they completely forgot about the x^4 term, it should be: 3x^4 + 5x^3 + 2x -3. So, if you want to verify the textbook's example numbers, input "0 5 0 2 0 -3" for the polynomial
+    // instead of what they wrote. 
     public static void polyPartB() {
         Scanner sc = new Scanner(System.in);
-        double[] test = getPolyInput(sc);
-        
-        Polynomial poly = new Polynomial(test);
+        Polynomial poly = new Polynomial(getPolyInput(sc));
 
 
         while(true) {
@@ -123,25 +126,16 @@ public class App {
     public static double[] getPolyInput(Scanner sc) {
         System.out.println("Enter the coefficients of a polynomial, like this: 3 5 0 2 -3");
         String[] input = sc.nextLine().split(" ", 0);
-        double[] inputAsDouble = Stream.of(input).mapToDouble(Double::parseDouble).toArray();
+        List<String> inputList = Arrays.asList(input);
+        Collections.reverse(inputList);
+        double[] inputAsDouble = Stream.of(inputList.toArray(new String[0])).mapToDouble(Double::parseDouble).toArray(); // there are definitely better ways to do this but I don't care
         return inputAsDouble;
     }
 
     public static void RiemannSummer() {
+        // Assuming a midpoint Riemann Sum
+        // values needed: range, polynomial
+        // 
         System.out.println("Enter a ");
-    }
-
-    public static void testing() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the coefficients of a polynomial, like this: 3 5 0 2 -3");
-        String[] input = sc.nextLine().split(" ", 0);
-        List<String> test = Arrays.asList(input);
-        double[] inputAsDouble = Stream.of(input).mapToDouble(Double::parseDouble).toArray();
-
-        int len = inputAsDouble.length;
-        double[] reversed = new double[len];
-        for (int i=len-1; i>=0; i++) {
-            
-        }
     }
 }
