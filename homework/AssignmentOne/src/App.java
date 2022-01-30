@@ -1,7 +1,9 @@
+import java.util.Scanner;
+
 public class App {
     
     public static void main(String[] args) throws Exception {
-        craps_sim();
+        shoppingBagDriver();
     }
 
     //'test driver' since idk how to generate tests in vscode 
@@ -67,11 +69,26 @@ public class App {
     }
 
     public static void shoppingBagDriver() {
-        ShoppingBag bag = new ShoppingBag(6.0); //tax = 6%
+        ShoppingBag bag = new ShoppingBag(0.06); //tax = 6%
         int count = 1;
+        Scanner sc  = new Scanner(System.in);
+
         while(count != 0) {
             System.out.println("Enter count (use 0 to stop):");
-            
+            count = sc.nextInt();
+            System.out.println("Enter cost: ");
+            double cost = sc.nextDouble();
+            bag.place(count, cost);
         }
+        System.out.println(bag.toString());
+        sc.close();
+    }
+
+    public static void polynomialDriver() {
+        Polynomial nom = new Polynomial(3);
+        nom.setCoefficient(3, 5);
+        nom.setCoefficient(1, 2);
+        nom.setCoefficient(0, -3);
+
     }
 }
