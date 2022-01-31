@@ -1,15 +1,13 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
 public class App {
     
     public static void main(String[] args) throws Exception {
-        RiemannSummer();
+        gimmeInteger();
     }
 
     //'test driver' since idk how to generate tests in vscode 
@@ -102,13 +100,12 @@ public class App {
 
     }
 
-    // The textbook has some WACK instructions for this part. They give an example where they say an input of "3 5 0 2 0 -3" should yield the polynomial 5x^3 + 2x - 3. Clearly,
-    // they completely forgot about the x^4 term, it should be: 3x^4 + 5x^3 + 2x -3. So, if you want to verify the textbook's example numbers, input "0 5 0 2 0 -3" for the polynomial
+    // The textbook has some WACK instructions for this part. They give an example where they say an input of "3 5 0 2 -3" should yield the polynomial 5x^3 + 2x - 3. Clearly,
+    // they completely forgot about the x^4 term, it should be: 3x^4 + 5x^3 + 2x -3. So, if you want to verify the textbook's example numbers, input "0 5 0 2 -3" for the polynomial
     // instead of what they wrote. 
     public static void polyPartB() {
         Scanner sc = new Scanner(System.in);
         Polynomial poly = new Polynomial(getPolyInput(sc));
-
 
         while(true) {
             System.out.println("Now enter a value (for x) to evaluate the polynomial:");
@@ -145,6 +142,7 @@ public class App {
         double max = sc.nextDouble();
         System.out.println("Enter how many rectangles to draw");
         double rectCount = sc.nextDouble();
+        sc.close();
 
         double range = max - min;
         double rectXLength = range / rectCount;
@@ -161,5 +159,22 @@ public class App {
         }
     
         System.out.println(rSum);
+    }
+
+    public static void gimmeInteger() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter an integer.");
+        while(true) {
+            try {
+                sc.nextInt();
+                System.out.println("Thank you");
+                sc.close();
+                break;
+            } catch(Exception e) {
+                System.out.println("That is not an integer. Try again");
+                sc.nextLine(); // otherwise the Scanner will take the sysout line above
+            }
+        }
+        
     }
 }
