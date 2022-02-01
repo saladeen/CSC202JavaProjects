@@ -1,3 +1,4 @@
+package Problem24;
 import java.util.Scanner;
 
 public class Banker {

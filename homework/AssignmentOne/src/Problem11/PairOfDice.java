@@ -1,3 +1,4 @@
+package Problem11;
 import java.security.SecureRandom;
 
 public class PairOfDice {
@@ -22,5 +23,13 @@ public class PairOfDice {
 
     public int getSum() {
         return diceOne + diceTwo;
+    }
+}
+
+class DiceDriver {
+    public static void main(String[] args) {
+        PairOfDice p = new PairOfDice();
+        p.roll();
+        System.out.println(p);
     }
 }

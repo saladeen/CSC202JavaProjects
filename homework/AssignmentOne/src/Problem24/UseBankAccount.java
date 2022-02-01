@@ -1,3 +1,4 @@
+package Problem24;
 public class UseBankAccount {
     public static void main(String[] args) throws BankAccountException {
         testAcct();

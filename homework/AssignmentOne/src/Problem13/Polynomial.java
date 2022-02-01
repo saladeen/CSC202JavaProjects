@@ -1,3 +1,4 @@
+package Problem13;
 
 public class Polynomial {
     int degree;
@@ -25,5 +26,18 @@ public class Polynomial {
             total += Math.pow(xval, i) * coefficients[i];
         }
         return total;
+    }
+}
+
+class PolynomialDriver {
+    public static void main(String[] args) {
+        Polynomial nom = new Polynomial(3);
+        nom.setCoefficient(3, 5);
+        nom.setCoefficient(1, 2);
+        nom.setCoefficient(0, -3);
+
+        System.out.println(nom.evaluate(0.0));
+        System.out.println(nom.evaluate(1.0));
+        System.out.println(nom.evaluate(0.5));
     }
 }
