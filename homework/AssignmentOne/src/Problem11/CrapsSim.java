@@ -15,7 +15,7 @@ public class CrapsSim {
             You win if a 7 or 11 roll, or lose if 2, 3, or 12 roll (known as “craps”). 
             Any other number that rolls becomes the “point” and the point must roll again before a 7 to win.
         */
-    
+
         for (int i=0; i<iterations; i++) {
             dice.roll();
             int roll = dice.getSum();
@@ -24,36 +24,23 @@ public class CrapsSim {
             } else if (roll == 2 || roll == 3 || roll == 12) { //loss
                 losses+=1;
             } else {
-                point = roll; // Set the point
-                boolean outcome = roll_until_point(point, wins, losses, dice); //Roll until you either get the point and win, or roll a 7 and lose. True = won, False = lost
-                if (outcome) {
-                    wins+=1;
-                } else {
-                    losses+=1;
+                point = roll; // Set the point 
+                while(true) { // Roll, as many times as necessary, until you roll the point again (win) or a 7 (loss)
+                    dice.roll();
+                    roll = dice.getSum();
+                    if (roll == point) {
+                        wins+=1;
+                        break;
+                    } else if (roll == 7) {
+                        losses+=1;
+                        break;
+                    }
                 }
             }
         }
-
         //Print results
         System.out.println("Total iterations: " + iterations);
         System.out.println("Wins: " + wins);
         System.out.println("Lossses: " + losses);
     }
-
-    public static boolean roll_until_point(int point, int wins, int losses, PairOfDice dice) {
-        int roll = 0;
-
-        while (roll != 7 || roll != point) {
-            dice.roll();
-            roll = dice.getSum();
-            if (roll == 7) {
-                return false;
-            } else if (roll==point) {
-                return true;
-            }
-        }
-        // this line should never actually run but is needed to shut up the compiler
-        return false;
-    }
-
 }

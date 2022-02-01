@@ -36,7 +36,7 @@ public class PolynomialBC {
         String[] input = sc.nextLine().split(" ", 0);
         List<String> inputList = Arrays.asList(input);
         Collections.reverse(inputList);
-        double[] inputAsDouble = Stream.of(inputList.toArray(new String[0])).mapToDouble(Double::parseDouble).toArray(); // there are definitely better ways to do this but I don't care
+        double[] inputAsDouble = Stream.of(inputList.toArray(new String[0])).mapToDouble(Double::parseDouble).toArray(); // there are definitely better ways to do this
         return inputAsDouble;
     }
 
