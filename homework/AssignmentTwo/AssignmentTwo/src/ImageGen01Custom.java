@@ -3,7 +3,7 @@ import java.awt.Color;
 import java.io.*;
 import javax.imageio.*;
 
-public class ImageGen01Custom{
+public class ImageGen01Custom {
     public static void main (String[] args) {
         String fileOut = "test.jpg";   // destination file
       
