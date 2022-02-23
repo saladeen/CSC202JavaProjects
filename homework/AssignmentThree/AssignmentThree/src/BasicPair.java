@@ -1,17 +1,28 @@
 public class BasicPair<T> implements PairInterface<T> {
-    public BasicPair(T first, T second) {
+    T first, second;
 
+    public BasicPair(T first, T second) {
+        this.first = first;
+        this.second = second;
     }
 
     @Override
     public T getFirst() {
-        // TODO Auto-generated method stub
-        return null;
+        return first;
     }
 
     @Override
     public T getSecond() {
-        // TODO Auto-generated method stub
-        return null;
+        return second;
+    }
+
+    @Override
+    public void setFirst(T first) {
+        this.first = first;
+    }
+
+    @Override
+    public void setSecond(T second) {
+        this.second = second;
     }
 }
