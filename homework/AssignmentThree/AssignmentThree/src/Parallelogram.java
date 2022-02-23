@@ -1,20 +1,24 @@
 public class Parallelogram implements FigureInterface {
-    double height, base, angleInRad;
+    double base, height, angleInRad;
 
     public Parallelogram(double base, double height, double angleInRad) {
-
+        this.base = base;
+        this.height = height;
+        this.angleInRad = angleInRad;
     }
 
     @Override
     public double perimeter() {
-        // calculate side lengths
-        // sin(angle)
+        // make a right triangle to solve for the vertical parallel side w/ trig identities
+        // sin(angle) = opposite / hypotenuse
+        // hypotenuse = opposite / sin(angle)
+        double hyp = height / Math.sin(angleInRad); // Math.sin() uses radians
+        return base * 2 + hyp * 2;
     }
 
     @Override
     public double area() {
-        // TODO Auto-generated method stub
-        return 0;
+        return base * height;
     }
     
 }
