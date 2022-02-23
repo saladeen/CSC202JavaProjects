@@ -74,4 +74,11 @@ public class ArrayBoundedStack<T> implements StackInterface<T>
   {              
     return (topIndex == (elements.length - 1));
   }
+
+  public String toString() {
+      String el = "";
+      for (T i: elements) {
+          el 
+      }
+  }
 }
