@@ -77,8 +77,48 @@ public class ArrayBoundedStack<T> implements StackInterface<T>
 
   public String toString() {
       String el = "";
-      for (T i: elements) {
-          el 
+      for (int i=0; i<=topIndex; i++) {
+          el += elements[i] + " ";
       }
+      return el;
+  }
+
+  public int size() {
+    if (isEmpty()) {
+      return 0;
+    } else {
+      return topIndex + 1;
+    }
+  }
+
+  public void popSome(int count) {
+    if (count <= size()) {
+      for (int i=0; i < count; i++) {
+        pop();
+      }
+    }
+  }
+
+  public boolean swapStart() {
+    if (size() < 2) {
+      return false;
+    } else { // swap the TOP two elements
+      T temp = elements[topIndex];
+      elements[topIndex] = elements[topIndex - 1];
+      elements[topIndex - 1] = temp;
+      return true;
+    }
+  }
+
+  public T poptop() throws StackUnderflowException {
+    if (isEmpty())
+      throw new StackUnderflowException("Pop attempted on an empty stack.");
+    else
+    {
+      T el = elements[topIndex];
+      elements[topIndex] = null;
+      topIndex--;
+      return el;
+    }
   }
 }
