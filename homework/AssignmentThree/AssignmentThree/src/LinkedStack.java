@@ -54,17 +54,17 @@ public class LinkedStack<T> implements StackInterface<T>
   }
 
   public String toString() {
-      String el = " ";
-      LLNode<T> ref = top.getLink();
+      String el = "";
+      LLNode<T> ref = top;
       while (ref != null) {
-          el += ref.getInfo() + " ";
+          el += ref.getInfo() + " -> "; // using arrows to specify linking, extra one at the end unfortunately but just ignore that
           ref = ref.getLink();
       }
       return el;
   }
 
   public int size() {
-      LLNode<T> ref = top.getLink();
+      LLNode<T> ref = top;
       int size = 0;
       while (ref != null) {
         size += 1;
@@ -83,6 +83,31 @@ public class LinkedStack<T> implements StackInterface<T>
       }
   }
 
-  public 
+  
+  public boolean swapStart() {
+    if (size() < 2) {
+      return false;
+    } else {
+      // very contrived, I'm sure there are better ways to do this
+      T tempFirst = top.getInfo();
+      T tempSecond = top.getLink().getInfo();
+      pop();
+      pop();
+      push(tempFirst);
+      push(tempSecond);
+      return true;
+    }
+  }
+  
+
+  public T poptop() throws StackUnderflowException {
+    if (isEmpty()) {
+      throw new StackUnderflowException();
+    } else {
+      T temp = top.getInfo();
+      pop();
+      return temp;
+    }
+  }
 }
 

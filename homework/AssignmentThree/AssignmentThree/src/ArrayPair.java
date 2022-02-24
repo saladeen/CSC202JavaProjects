@@ -4,7 +4,9 @@ public class ArrayPair<T> implements PairInterface<T> {
     private T[] pair;
 
     public ArrayPair(Class<T> clazz, T first, T second) {
-        final T[] pair = (T[]) Array.newInstance(clazz, 2); // https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java I still don't really get this
+        final T[] pair = (T[]) Array.newInstance(clazz, 2); // https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
+        // (T[]) new Object[2] also works, newInstance might be better bc you specify the class but there's still an unchecked warning
+        
         pair[0] = first;
         pair[1] = second;
         this.pair = pair;

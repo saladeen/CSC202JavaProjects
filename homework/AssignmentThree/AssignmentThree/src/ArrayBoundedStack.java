@@ -91,8 +91,10 @@ public class ArrayBoundedStack<T> implements StackInterface<T>
     }
   }
 
-  public void popSome(int count) {
-    if (count <= size()) {
+  public void popSome(int count) throws StackUnderflowException {
+    if (count > size()) {
+      throw new StackUnderflowException();
+    } else {
       for (int i=0; i < count; i++) {
         pop();
       }
