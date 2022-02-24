@@ -12,22 +12,18 @@ public class ArrayPair<T> implements PairInterface<T> {
         this.pair = pair;
     }
 
-    @Override
     public T getFirst() {
         return pair[0];
     }
 
-    @Override
     public T getSecond() {
         return pair[1];
     }
 
-    @Override
     public void setFirst(T first) {
         pair[0] = first;
     }
 
-    @Override
     public void setSecond(T second) {
         pair[1] = second;
     }

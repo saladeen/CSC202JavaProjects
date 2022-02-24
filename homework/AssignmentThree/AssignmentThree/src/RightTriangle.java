@@ -7,13 +7,11 @@ public class RightTriangle implements FigureInterface {
         this.legB = legB;
     }
 
-    @Override
     public double perimeter() {
         double c = Math.pow( legA * legA + legB * legB, 0.5); // a^2 + b^2 = c^2
         return legA + legB + c;
     }
 
-    @Override
     public double area() {
         return (legA * legB) / 2;
     }

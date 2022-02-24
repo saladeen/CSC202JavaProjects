@@ -5,12 +5,10 @@ public class Square implements FigureInterface {
         side = sideLen;
     }
 
-    @Override
     public double perimeter() {
         return side * 4;
     }
 
-    @Override
     public double area() {
         return side * side;
     }

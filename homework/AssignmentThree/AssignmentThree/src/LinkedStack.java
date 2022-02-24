@@ -57,7 +57,7 @@ public class LinkedStack<T> implements StackInterface<T>
       String el = "";
       LLNode<T> ref = top;
       while (ref != null) {
-          el += ref.getInfo() + " -> "; // using arrows to specify linking, extra one at the end unfortunately but just ignore that
+          el += ref.getInfo() + " -> "; // using arrows to specify linking, extra one at the end unfortunately
           ref = ref.getLink();
       }
       return el;
@@ -88,12 +88,11 @@ public class LinkedStack<T> implements StackInterface<T>
     if (size() < 2) {
       return false;
     } else {
-      // very contrived, I'm sure there are better ways to do this
+      // get info of first. get info of second. pop. set info of second (now in first spot). push info of original second.
       T tempFirst = top.getInfo();
       T tempSecond = top.getLink().getInfo();
       pop();
-      pop();
-      push(tempFirst);
+      top.setInfo(tempFirst);;
       push(tempSecond);
       return true;
     }
