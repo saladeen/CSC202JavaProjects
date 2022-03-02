@@ -9,7 +9,6 @@ public class Tracker1 implements NumTrackerInterface {
     }
 
     public void add(int a) {
-        
         count += 1;
         sum = sum + a;
         average = sum / count;
