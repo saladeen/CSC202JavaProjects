@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class Problem12 {
     static int[] values = {7, 2, 3, 8, 3, 9};
 

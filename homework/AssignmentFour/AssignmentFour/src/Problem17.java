@@ -1,4 +1,4 @@
-public class Problem16 {
+public class Problem17 {
     public static void main(String[] args) {
         LLStack<Integer> stack = new LLStack<Integer>();
         stack.push(3);
@@ -12,18 +12,17 @@ public class Problem16 {
         stack.push(19);
         stack.push(20);
         LLNode<Integer> topNode = stack.top;
-        System.out.println(numEvens(topNode));
+        System.out.println(contains(10, topNode));
     }
-    
-    public static int numEvens(LLNode<Integer> list) {
-        int isEven = 0; // 0 = not even (doesn't increase # of evens) 1 = even (increases total # by 1)
-        if (list.getInfo() % 2 == 0) {
-            isEven = 1;
+    public static boolean contains(int target, LLNode<Integer> list) {
+        boolean contains = false;
+        if (list.getInfo() == target) {
+            contains = true;
         }
-        if (list.getLink() == null) { // base case
-            return isEven;
+        if (list.getLink() == null) {// base case
+            return contains;
         } else {
-            return isEven + numEvens(list.getLink());
+            return (contains || contains(target, list.getLink()));
         }
     }
 }

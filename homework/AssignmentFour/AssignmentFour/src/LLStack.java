@@ -1,4 +1,4 @@
-// copied parts from BookFiles but only really needed push
+// copied parts from BookFiles but only really needed push to create a sample linked list easily
 public class LLStack<T> {
     LLNode<T> top;
 
