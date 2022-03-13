@@ -20,7 +20,7 @@ public class Queue<T> implements QueueInterface<T> {
         numElements++;
     }
 
-    public T dequeue() throws QueueOverflowException {
+    public T dequeue() throws QueueUnderflowException {
         if (isEmpty()) {
             throw new QueueUnderflowException("Dequeue attempted on empty queue.");
         } else {
@@ -45,5 +45,25 @@ public class Queue<T> implements QueueInterface<T> {
     public int size() {
         return numElements;
     }
-    
+
+    //Methods added for Question 30 (Queue class is basically their LinkedQueue)
+    public boolean safeEnqueue(T element) {
+        // A linked list is never full, in theory
+        enqueue(element);
+        return true;
+    }
+
+    public T safeDequeue() {
+        if (isEmpty()) {
+            return null;
+        } else {
+            T element = front.getInfo();
+            front = front.getLink();
+            if (front == null) {
+                rear = null;
+            }
+            numElements--;
+            return element;
+        }
+    }
 }

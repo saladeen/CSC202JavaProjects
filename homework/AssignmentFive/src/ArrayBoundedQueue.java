@@ -75,4 +75,75 @@ public class ArrayBoundedQueue<T> implements QueueInterface<T>
     return numElements;
   }
   
+  // New methods added for Problem 12
+  public String toString() {
+    String combined = "";
+    for (int i=front; i<=rear; i++) {
+      combined += (elements[i] + "\n");
+    }
+    return combined;
+  }
+
+  public int space() {
+    return (elements.length - numElements);
+  }
+
+  public void remove(int count) throws QueueUnderflowException {
+    for (int i = 0; i < count; i++) {
+      if (numElements == 0) {
+        throw new QueueOverflowException("Tried to remove from an empty queue");
+      } else {
+        elements[front] = null;
+        front = (front + 1) % elements.length;
+        numElements = numElements - 1;
+      }
+    }
+  }
+
+  public boolean swapStart() {
+    if (numElements < 2) {
+      return false;
+    } else {
+      int ftemp = (front + 1) % elements.length;
+      T temp = elements[front];
+      elements[front] = elements[ftemp];
+      elements[ftemp] = temp;
+      return true;
+    }
+  }
+
+  public boolean swapEnds() {
+    if (numElements < 2) {
+      return false;
+    } else {
+      T temp = elements[front];
+      elements[front] = elements[rear];
+      elements[rear] = temp;
+      return true;
+    }
+  }
+
+  // Methods added for Question 30
+  public boolean safeEnqueue(T element) {
+    if (isFull()) {
+      return false;
+    } else {
+      rear = (rear + 1) % elements.length;
+      elements[rear] = element;
+      numElements = numElements + 1;
+      return true;
+    }
+  }
+
+  public T safeDequeue() {
+    if (isEmpty()) {
+      return null;
+    } else {
+      T toReturn = elements[front];
+      elements[front] = null;
+      front = (front + 1) % elements.length;
+      numElements = numElements - 1;
+      return toReturn;
+    }
+  }
 }
