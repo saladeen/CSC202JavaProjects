@@ -1,0 +1,34 @@
+12.
+    a. ABList add(T element) has a special case when the current array is full, in that case, enlarge() is called, then the add operation continues.
+       ABList add(int index, T element) has a special case when index < 0 or index > the size of the array, in which case an IndexOutOfBoundsException is thrown. It also has the enlarge() special case.
+
+    b. ABList set(int index, T newElement) has the same special case to indexed add, if index < 0 or index > array size, throw IndexOutOfBoundsException.
+
+    c. LBList indexed add has the same IndexOutOfBoundsException check as above, and a special case if adding to the front: if the list is empty, set rear and front nodes to the new node to be added. 
+       If the list isn't empty (and add index is 0) then the new node is linked to the front. If adding to rear, the new node is linked to the rear. Otherwise, iterate through the list to find the node at the index, 
+       then link the new node to the node before that, and the node at the index to the new node.
+
+    d. LBList indexed remove has the same IndexOutOfBoundsException checks as previous methods, and a special case if the index points to the first element (remove front node). 
+       Otherwise, the previous node is linked to the node after the target. In a separate case, if the front node ends up null, then the only element has been removed, 
+       so the rear node is also set to null.
+
+    e. LBList iterator remove has a special case if there is nothing in the linked list (do nothing, return void). If removing front element, change front pointer to next element, 
+       set current position to null (then decrement numElements). If that was the only element (front is now null), then set rear pointer to null and current pointer to null 
+       (and decrement numElements). Otherwise, previous node is linked to the next node, current position is set to null, and numElements is decremented 
+
+13. (+ 31.)
+Worst-case time complexities
+
+operation       ABList      LBList      SortedABList
+
+add             O(1)        O(1)        O(N)            Adds to end of list for AB and LB so O(1), sorted in SortedAB so O(N)
+get             O(N)        O(N)        O(N)            Searches through, at worst, the entire list, so all O(N)
+contains        O(N)        O(N)        O(N)            Searches through, at worst, the entire list, so all O(N)
+remove          O(N)        O(N)        O(N)            ABList & SortedABList search through, then shift every element, but this time is additive so its still O(N). LBList searches through, does not have to shift, but total is still O(N) from search
+isEmpty         O(1)        O(1)        O(1)            Same in all cases, one assertion regardless of size, so O(1)
+indexed add     O(N)        O(N)        unsupported     ABList at worst shifts everything, so O(N), LBList at worst still needs to search the list for the indexed spot, so O(N)
+indexed set     O(1)        O(N)        unsupported     ABList calls one operation regardless or size, so O(1), LBList needs to search for the index so O(N)
+indexOf         O(N)        O(N)        O(N)            All require searching the list, so O(N)
+indexed get     O(1)        O(N)        O(1)            ABList & SortedABList call one operation regardless of size, so O(1), LBList needs to search for the index so O(N)
+iterator next   O(1)        O(1)        O(1)            All call one operation regardless of size, so O(1)
+iterator remove O(N)        O(1)        O(N)            ABList & SortedABList shift everything so O(N), LBList iterator remove() does not grow depending on list size so O(1)
