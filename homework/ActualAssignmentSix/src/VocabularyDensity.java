@@ -15,10 +15,10 @@ public class VocabularyDensity
   {
     final int THRESHOLD = 3;
     final int CAPACITY = 1000;   // capacity of collection
-    String[] fnames = args; // input file of text
+    String[] fnames = args; // = {"src/BritishMagnaCarta.txt", "src/constitution.txt"}; // input file of text
     String word;                 // current word
-    int numWords = 0;            // total number of words
-    int uniqWords;               // number of unique words
+    //int numWords = 0;            // total number of words
+    //int uniqWords;               // number of unique words
     double density;              // vocabulary density
 
     CollectionInterface<String> combined = new ArrayCollection<String>(CAPACITY);
@@ -26,6 +26,7 @@ public class VocabularyDensity
 
     for (String file: fnames) {
       CollectionInterface<String> words = new ArrayCollection<String>(CAPACITY);
+      int numWords = 0;
 
       // Set up file reading
       FileReader fin = new FileReader(file);
@@ -38,8 +39,9 @@ public class VocabularyDensity
         word = word.toLowerCase();
         if (!words.contains(word) && word.length() >= THRESHOLD)
           words.add(word);
-          // check isn't really necessary
-          combined.add(word);
+          if(!combined.contains(word)) {
+            combined.add(word);
+          }
         numWords++;
         totalWords++;
       }

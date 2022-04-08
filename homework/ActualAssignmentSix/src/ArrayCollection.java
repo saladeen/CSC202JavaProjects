@@ -29,36 +29,45 @@ public class ArrayCollection<T> implements CollectionInterface<T>
     elements = (T[]) new Object[capacity];
   }
 
-  //Methods added for #8
+  // Methods added for #8, 5.2
   public String toString() {
     String output = "";
-    for (T i: elements) {
-      output += i + ", ";
+    for (int i=0; i<numElements; i++) {
+      output += elements[i] + ", ";
     }
     return output;
   }
 
   public int count(T target) {
     int count = 0;
-    for(T i: elements) {
-      if(i.equals(target)) {
+    for(int i=0; i<numElements; i++) {
+      if(elements[i].equals(target)) {
         count += 1;
       }
     }
     return count;
   }
 
-  public void removeAll(T target) {
-    for (int i=0; i<count(target); i++) {
-      remove(target);
+  public void removeAll(T target) { // breaks if last element is a dupe unfortunately, but removes everything else
+    for (int i=0; i<numElements; i++) {
+      if (elements[i].equals(target)) {
+        elements[i] = elements[numElements - 1]; // Overwrite the match with the last element
+        elements[numElements - 1] = null; // Remove the duplicate element at last index
+        numElements--;
+      }
     }
   }
 
   public ArrayCollection<T> combine(ArrayCollection<T> other) {
+    ArrayCollection<T> newColl = new ArrayCollection<T>(numElements + other.numElements);
     for (int i=0; i<numElements; i++) {
-      other.add(elements[i]);
+      newColl.elements[i] = elements[i];
     }
-    return other;
+    for (int j=0; j<other.numElements; j++) {
+      newColl.elements[j + numElements] = other.elements[j];
+    }
+    newColl.numElements = numElements + other.numElements;
+    return newColl;
   }
 
   protected void find(T target)

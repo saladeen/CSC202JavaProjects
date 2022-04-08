@@ -28,10 +28,10 @@ public class LinkedCollection<T> implements CollectionInterface<T>
     String result = "";
     LLNode<T> curr = head;
     while(curr != null) {
-      result = curr.getInfo().toString() + " -> ";
+      result += curr.getInfo().toString() + " -> ";
       curr = curr.getLink();
     }
-    return result + "null";
+    return result;
   }
 
   public int count(T target) {
@@ -47,19 +47,40 @@ public class LinkedCollection<T> implements CollectionInterface<T>
   }
 
   public void removeAll(T target) {
-    for (int i=0; i<count(target); i++) {
-      remove(target);
+    LLNode<T> location = head;
+    while (location != null) {
+      if(location.getInfo().equals(target)) {
+        // if head node, just delete head
+        if (location.equals(head)) {
+          head = head.getLink();
+        } else { // otherwise need to relink
+          previous.setLink(location.getLink());
+        }
+        numElements--;
+      }
+      previous = location;
+      location = location.getLink();
     }
   }
 
   public LinkedCollection<T> combine(LinkedCollection<T> other) {
     // it says SortedArrayCollection in the question but im assuming thats a typo
+    LinkedCollection<T> newColl = new LinkedCollection<T>();
     LLNode<T> curr = head;
     while(curr != null) {
-      other.add(curr.getInfo());
+      LLNode<T> newNode = new LLNode<T>(curr.getInfo());
+      newNode.setLink(newColl.head);
+      newColl.head = newNode;
       curr = curr.getLink();
     }
-    return other;
+    curr = other.head;
+    while(curr != null) {
+      LLNode<T> newNode = new LLNode<T>(curr.getInfo());
+      newNode.setLink(newColl.head);
+      newColl.head = newNode;
+      curr = curr.getLink();
+    }
+    return newColl;
   }
 
   public boolean add(T element)

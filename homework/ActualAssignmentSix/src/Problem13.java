@@ -27,15 +27,18 @@ public class Problem13 {
         Scanner userIn = new Scanner(System.in);
         int correctGuesses = 0;
 
+        CollectionInterface<String> guesses = new ArrayCollection<String>(CAP);
+
         while(running) {
             char curr = (char)(srand.nextInt(26) + 'a');
             System.out.println("Guess a unique animal that starts with: " + curr);
             String guess = userIn.nextLine();
-            if (animals.contains(guess) && guess.charAt(0) == curr) {
+            if (animals.contains(guess) && guess.charAt(0) == curr && !guesses.contains(guess)) {
                 System.out.println("Correct!");
+                guesses.add(guess);
                 correctGuesses++;
             } else {
-                System.out.println("Sorry, not in the list or wrong letter. Game over.");
+                System.out.println("Sorry, not in the list, wrong letter, or you already guessed that. Game over.");
                 break;
             }
         }
