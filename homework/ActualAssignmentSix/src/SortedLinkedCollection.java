@@ -6,6 +6,13 @@ public class SortedLinkedCollection<T extends Comparable<T>> implements Collecti
     private LLNode<T> location;
     private LLNode<T> previous;
 
+    // Need to rewrite this entire thing
+    // add toString()
+    // Logic:
+    // Duplicate elements ALLOWED
+    // Null elements not allowed
+    // All elements SORTED IN PLACE
+
     public SortedLinkedCollection() {
         head = null;
     }
@@ -33,7 +40,7 @@ public class SortedLinkedCollection<T extends Comparable<T>> implements Collecti
         if (find(element)) {
             return false;
         }
-        if (head.equals(null)) {
+        if (numElements == 0) { // head.equals(null) not allowed, trying numElements == 0;
             LLNode<T> newNode = new LLNode<T>(element);
             newNode.setLink(head);
             head = newNode;
