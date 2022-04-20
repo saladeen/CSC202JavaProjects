@@ -15,6 +15,7 @@
 public interface ListInterface<T> extends Iterable<T>
 {
   void add(int index, T element);
+  // Why the hell is this indexed???????
   // Throws IndexOutOfBoundsException if passed an index argument
   // such that index < 0 or index > size().
   // Otherwise, adds element to this list at position index; all current 
