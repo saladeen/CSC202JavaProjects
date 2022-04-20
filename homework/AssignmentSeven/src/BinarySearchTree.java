@@ -66,9 +66,100 @@ public class BinarySearchTree<T> implements BSTInterface<T>
   }
 
   // Added for #29
-  public T min2() {
-    if (isEmpty()) {
+  // way easier to pass root as argument
+  public T min2(BSTNode<T> node) {
+    if (node == null) {
       return null;
+    } else if (node.getLeft() == null) {
+      return node.getInfo();
+    } else {
+      return min2(node.getLeft());
+    }
+
+  }
+
+  // Added for #30
+  // A node is a leaf node if both left and right child nodes of it are null. (bottom row of a tree, basically)
+  // iterative
+  public int iterLeafCount() {
+    if (root == null) {
+      return 0;
+    }
+    int leafCount = 0;
+    // Use a stack, like they did for size()
+    LinkedStack<BSTNode<T>> stack = new LinkedStack<BSTNode<T>>();
+    stack.push(root);
+    while(!stack.isEmpty()) {
+      BSTNode<T> curr = stack.top();
+      stack.pop();
+      if(curr.getLeft() != null) {
+        stack.push(curr.getLeft());
+      }
+      if (curr.getRight() != null) {
+        stack.push(curr.getRight());
+      }
+      if (curr.getLeft() == null && curr.getRight() == null) {
+        leafCount++;
+      }
+    }
+    return leafCount;
+  }
+
+  // recursive
+  public int recLeafCount(BSTNode<T> node) {
+    if (node == null) {
+      return 0;
+    }
+    if (node.getLeft() == null & node.getRight() == null) {
+      return 1;
+    } else {
+      return recLeafCount(node.getLeft()) + recLeafCount(node.getRight());
+    }
+  }
+
+  // #31
+  
+  // recursively counts nodes with 1 child
+  public int recOneChild孩政策(BSTNode<T> node) {
+    if (node == null) {
+      return 0;
+    }
+    int count = 0;
+    if ((node.getLeft() == null && node.getRight() != null) || (node.getLeft() != null && node.getRight() == null)) {
+      count++;
+    }
+    count += (recOneChild孩政策(node.getLeft()) + recOneChild孩政策(node.getRight()));
+    return count;
+  }
+
+  // iteratively counts nodes with 1 child
+  public int iterOneChildPolicy() {
+    if (root == null) {
+      return 0;
+    }
+    int count = 0;
+    LinkedQueue<BSTNode<T>> q = new LinkedQueue<BSTNode<T>>();
+    q.enqueue(root);
+    while(!q.isEmpty()) {
+      BSTNode<T> node = q.dequeue();
+      if ((node.getLeft() == null && node.getRight() != null) || (node.getLeft() != null && node.getRight() == null)) {
+        count++;
+      }
+      if (node.getLeft() != null) {
+        q.enqueue(node.getLeft());
+      }
+      if (node.getRight() != null) {
+        q.enqueue(node.getRight());
+      }
+    }
+    return count;
+  }
+
+  // #32
+
+  public int recHeight(BSTNode<T> node) {
+    if (node == null) {
+      return 0;
     }
   }
 
