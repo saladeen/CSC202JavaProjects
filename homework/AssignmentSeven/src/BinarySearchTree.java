@@ -156,11 +156,40 @@ public class BinarySearchTree<T> implements BSTInterface<T>
   }
 
   // #32
-
+  // recursive height
   public int recHeight(BSTNode<T> node) {
     if (node == null) {
       return 0;
     }
+    int leftHeight = recHeight(node.getLeft());
+    int rightHeight = recHeight(node.getRight());
+    return Integer.max(leftHeight, rightHeight) + 1;
+  }
+
+  // iterative height
+  public int iterHeight() {
+    if (root == null) {
+      return 0;
+    }
+    int height = 0;
+    LinkedQueue<BSTNode<T>> q = new LinkedQueue<BSTNode<T>>();
+    q.enqueue(root);
+    while (!q.isEmpty()) {
+      int size = q.size();
+      while(size > 0) {
+        BSTNode<T> front = q.dequeue();
+
+        if (front.getLeft() != null) {
+          q.enqueue(front.getLeft());
+        }
+        if (front.getRight() != null) {
+          q.enqueue(front.getRight());
+        }
+        size--;
+      }
+      height++;
+    }
+    return height;
   }
 
   public T max()
