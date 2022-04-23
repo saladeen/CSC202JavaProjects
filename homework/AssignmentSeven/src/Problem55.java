@@ -1,10 +1,14 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Problem55 {
     public static void main(String[] args) throws FileNotFoundException {
-        String file = "src/input.txt"; // test file: src/input.txt
+        // WordFreq should be able to handle n-grams as the word is stored in a string
+
+        String file = "src/the-full-bee-movie-script.txt";
         Scanner userIn = new Scanner(System.in);
         System.out.print("n-gram length:");
         int minLength = userIn.nextInt();
@@ -16,30 +20,43 @@ public class Problem55 {
         sc.useDelimiter("[^a-zA-Z']+");
         
         BinarySearchTree<WordFreq> tree = new BinarySearchTree<WordFreq>();
-        
+
+
+        String text = "";
+        // throwing everything into a single string w/ spaces between
         while(sc.hasNext()) {
-            WordFreq word = new WordFreq(sc.next().toLowerCase());
-            WordFreq wordInTree = tree.get(word);
-            if (wordInTree != null) {
-                wordInTree.inc();
+            String word = sc.next().toLowerCase();
+            text += word + " ";
+        }
+        // easily split by spaces
+        String[] words = text.split(" ");
+
+        
+        // then we combine n words together into WordFreq objects, and check for duplicates
+        for (int i=0; i<words.length - minLength + 1; i++) {
+            WordFreq gram = new WordFreq(concatN(words, i, i+minLength));
+            WordFreq gramInTree = tree.get(gram);
+            if (gramInTree != null) {
+                gramInTree.inc();
             } else {
-                word.inc();
-                tree.add(word);
-            }
-            
-        }
-
-        String longestWord = "";
-        int count = 0;
-        for (WordFreq wordFromTree: tree) { // im sure there are better ways to do this
-            if(wordFromTree.getWordIs().length() > longestWord.length()) {
-                longestWord = wordFromTree.getWordIs();
-                count = wordFromTree.getFreq();
+                gram.inc();
+                tree.add(gram);
             }
         }
-        System.out.println("Longest word is: " + longestWord + ", occuring " + count + " times.");
 
-        userIn.close();
-        sc.close();
+        System.out.println("The " + minLength + "-grams with frequency counts  of " + minFreq + " and above:");
+        for (WordFreq word: tree) {
+            if (word.getFreq() >= minFreq) {
+                System.out.println(word);
+            }
+        }
+    }
+
+    public static String concatN(String[] words, int start, int end) {
+        StringBuilder sb = new StringBuilder();
+        for (int i=start; i<end; i++) {
+            sb.append((i > start ? " " : "") + words[i]); // elvis operator buffoonery
+        }
+        return sb.toString();
     }
 }

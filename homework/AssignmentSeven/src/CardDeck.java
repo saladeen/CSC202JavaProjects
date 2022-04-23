@@ -32,15 +32,16 @@ public class CardDeck
   // Methods added for #19
   public int cardsRemaining() {
     // Return number of undealt cards remaining
-    // how though
+    // I'm confused because the nextCard() function doesn't alter the underlying deck via remove() 
+    return deck.size();
   }
 
   public Card peek() {
-
+    return nextCard(); // it doesn't consume the deck so
   }
 
   public void reset() {
-
+    
   }
 
   public void shuffle()

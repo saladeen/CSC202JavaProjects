@@ -12,7 +12,8 @@ public class CardHandCLI
   public static void main(String[] args)
   {
     Scanner scan = new Scanner(System.in);
-    final int HANDSIZE = Integer.parseInt(args[0]); // #20
+    System.out.print("Enter how many cards are in a hand > ");
+    final int HANDSIZE = scan.nextInt();
     int slot;
 
     Card card;                       // playing card
