@@ -9,9 +9,7 @@ public class StringPairApp {
         // Generate map of element numbers and names
         Scanner reader = new Scanner(new FileReader(new File("src/periodic.txt")));
         ArrayListMap<Integer, String> elementMap = new ArrayListMap<Integer, String>(); // element#, element
-        // Skip first line
-        // I also changed their line "aluminum or aluminium" to "aluminum" because it was breaking my method and this is fucking America. also updated the superheavy elements to their new names
-        // better way would be to make the Scanner use a delimeter of # and trim the extra spaces
+        
         reader.nextLine();
         
         while (reader.hasNext()) {

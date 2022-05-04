@@ -72,6 +72,12 @@ public class WeightedGraph<T>
   public boolean hasVertex(T vertex)
   // Returns true if this graph contains vertex; otherwise, returns false.
   {
+    for (T i: vertices) {
+      if (i.equals(vertex)) {
+        return true;
+      }
+    } 
+    return false;
   }
   
   private int indexIs(T vertex)
@@ -106,6 +112,8 @@ public class WeightedGraph<T>
     return edges[row][column];
   }
 
+  /*
+
   public QueueInterface<T> getToVertices(T vertex)
   // Returns a queue of the vertices that vertex is adjacent to.
   {
@@ -119,24 +127,40 @@ public class WeightedGraph<T>
     return adjVertices;
   }
 
+  */
+
   public void clearMarks()
   // Unmarks all vertices.
   {
+    for (int i=0; i<marks.length; i++) {
+      marks[i] = false;
+    }
   }
 
   public void markVertex(T vertex)
   // Marks vertex.
   {
+    marks[indexIs(vertex)] = true;
   }
 
   public boolean isMarked(T vertex)
   // Returns true if vertex is marked; otherwise, returns false.
   {
+    if (marks[indexIs(vertex)] == false) {
+      return true;
+    }
+    return false;
   }
   
   public T getUnmarked()
   // Returns an unmarked vertex if any exist; otherwise, returns null.
   {
+    for (int i=0; i<marks.length; i++) {
+      if (marks[i] == true) {
+        return vertices[i];
+      }
+    }
+    return null;
   }
   
   public boolean edgeExists(T vertex1, T vertex2)
